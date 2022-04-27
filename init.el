@@ -10,7 +10,8 @@
 
 (set-face-attribute 'default nil :font "Consolas" :height 110)
 
-(load-theme 'adwaita)
+;; Load default theme
+;; (load-theme 'adwaita)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -20,7 +21,7 @@
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
 			 ("org" . "https://orgmode.org/elpa/")
-			 ("elpa" . "https://elpa.gnu.org/packages")))
+			 ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 (unless package-archive-contents
@@ -31,11 +32,26 @@
   (package-install 'use-package))
  
 (require 'use-package)
+
+;; set :ensure t on by default
+;; it ensures that use-package will always download packages on first install or if some of them are not presented
 (setq use-package-always-ensure t)
+
+(column-number-mode)
+(global-display-line-numbers-mode t)
+
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+		term-mode-hook
+		eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (use-package command-log-mode)
 
- (use-package ivy
+(use-package swiper
+  :ensure t)
+
+(use-package ivy
   :diminish
   :bind (("C-s" . swiper)
 	 :map ivy-minibuffer-map
@@ -53,6 +69,65 @@
   :config
   (ivy-mode 1))
 
+;; For Windows to correctly display icons should run `all-the-icons-install-fonts` and select folder where to install
+;; then click on enach file to install fonts
+;; after that you can open emacs and there should be icons insted of placeholders on `doom-modeline`
 (use-package doom-modeline
   :ensure t
-  :init (doom-modeline-mode 1))
+  :init (doom-modeline-mode 1)
+  :custom ((doom-modeline-height 15)))
+
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t
+	doom-themes-enable-italic t)
+  (load-theme 'doom-solarized-dark-high-contrast t)
+  (doom-themes-visual-bell-config))
+
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package which-key
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0.3))
+
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1))
+
+(use-package counsel
+  :bind(("M-x" . counsel-M-x)
+	("C-x b" . counsel-ibuffer)
+	("C-x C-f" . counsel-find-file)
+	:map minibuffer-local-map
+	("C-r" . 'counsel-minibuffer-history)))
+
+(use-package helpful
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-key] . helpful-key))
+
+;; Some code that was generated automaticaly
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("745d03d647c4b118f671c49214420639cb3af7152e81f132478ed1c649d4597d" default))
+ '(package-selected-packages
+   '(helpful doom-themes counsel swiper ivy-rich which-key rainbow-delimiters doom-modeline ivy use-package command-log-mode)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
