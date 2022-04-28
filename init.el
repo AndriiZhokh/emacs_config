@@ -72,6 +72,13 @@
 ;; For Windows to correctly display icons should run `all-the-icons-install-fonts` and select folder where to install
 ;; then click on enach file to install fonts
 ;; after that you can open emacs and there should be icons insted of placeholders on `doom-modeline`
+;; For Linux
+;; First time  you load  your configuration on a new machine, you'll need to run the following command interactively so
+;; that mode line icons display correctly
+;;
+;; M-x all-the-icons-install-fonts
+;; and uncomment next kine
+;; (use-package all-the-icons)
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1)
@@ -81,7 +88,7 @@
   :config
   (setq doom-themes-enable-bold t
 	doom-themes-enable-italic t)
-  (load-theme 'doom-nord t)
+  (load-theme 'doom-nord-light t)
   (doom-themes-visual-bell-config))
 
 
@@ -115,6 +122,17 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
+(use-package general
+  :config
+  (general-create-definer rune/leader-keys
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "C-SPC")
+  
+  (rune/leader-keys
+   "t"  '(:ignore t :which-key "toggles")
+   "tt" '(counsel-load-theme :which-key "choose theme")))
+
 ;; Some code that was generated automaticaly
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -124,7 +142,7 @@
  '(custom-safe-themes
    '("745d03d647c4b118f671c49214420639cb3af7152e81f132478ed1c649d4597d" default))
  '(package-selected-packages
-   '(helpful doom-themes counsel swiper ivy-rich which-key rainbow-delimiters doom-modeline ivy use-package command-log-mode)))
+   '(general helpful doom-themes counsel swiper ivy-rich which-key rainbow-delimiters doom-modeline ivy use-package command-log-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
