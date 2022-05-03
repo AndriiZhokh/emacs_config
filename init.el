@@ -133,6 +133,39 @@
    "t"  '(:ignore t :which-key "toggles")
    "tt" '(counsel-load-theme :which-key "choose theme")))
 
+(defun rune/evil-hook ()
+  (dolist (mode '(custom-mode
+		  eshell-mode
+		  git-rabase-mode
+		  erc-mode
+		  circle-server-mode
+		  circle-chat-mode
+		  circle-query-mode
+		  sauron-mode
+		  term-mode))
+    (add-to-list 'evil-emacs-state-modes mode)))
+
+;; First time while added evil with all configuration it doesn't work
+;; It was fixed by commented all configuration lines (left only (use-package evil) and (evil-mode 1)
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-i-jump nil)
+  :hook (evil-mode . rune/evil-hook)
+  :config
+  (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+
+  ;; Use visual line motions even outside of visual-line-mode buffers
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'dashboard-mode 'normal))
+
 ;; Some code that was generated automaticaly
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -142,7 +175,7 @@
  '(custom-safe-themes
    '("745d03d647c4b118f671c49214420639cb3af7152e81f132478ed1c649d4597d" default))
  '(package-selected-packages
-   '(general helpful doom-themes counsel swiper ivy-rich which-key rainbow-delimiters doom-modeline ivy use-package command-log-mode)))
+   '(evil general helpful doom-themes counsel swiper ivy-rich which-key rainbow-delimiters doom-modeline ivy use-package command-log-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
