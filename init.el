@@ -88,7 +88,11 @@
   :config
   (setq doom-themes-enable-bold t
 	doom-themes-enable-italic t)
-  (load-theme 'doom-nord-light t)
+  ;; Often used themes
+  (load-theme 'doom-henna)
+  ;; (load-theme 'doom-ephemeral)
+  ;; (load-theme 'doom-moonlight)
+  ;; (load-theme 'doom-nord-light t)
   (doom-themes-visual-bell-config))
 
 
@@ -147,24 +151,26 @@
 
 ;; First time while added evil with all configuration it doesn't work
 ;; It was fixed by commented all configuration lines (left only (use-package evil) and (evil-mode 1)
+;; Don't know why but evil mode doesn'y work with all these config after fresh open
+;; but works fine with "minimal" config
 (use-package evil
-  :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-i-jump nil)
-  :hook (evil-mode . rune/evil-hook)
+  ;; :init
+  ;; (setq evil-want-integration t)
+  ;; (setq evil-want-keybinding nil)
+  ;; (setq evil-want-C-u-scroll t)
+  ;; (setq evil-want-C-i-jump nil)
+  ;; :hook (evil-mode . rune/evil-hook))
   :config
-  (evil-mode 1)
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+  (evil-mode 1))
+  ;; (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  ;; (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
   ;; Use visual line motions even outside of visual-line-mode buffers
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  ;; (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  ;; (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
-  (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal))
+  ;; (evil-set-initial-state 'messages-buffer-mode 'normal)
+  ;; (evil-set-initial-state 'dashboard-mode 'normal))
 
 ;; Some code that was generated automaticaly
 (custom-set-variables
@@ -173,7 +179,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("745d03d647c4b118f671c49214420639cb3af7152e81f132478ed1c649d4597d" default))
+   '("6c531d6c3dbc344045af7829a3a20a09929e6c41d7a7278963f7d3215139f6a7" "745d03d647c4b118f671c49214420639cb3af7152e81f132478ed1c649d4597d" default))
  '(package-selected-packages
    '(evil general helpful doom-themes counsel swiper ivy-rich which-key rainbow-delimiters doom-modeline ivy use-package command-log-mode)))
 (custom-set-faces
