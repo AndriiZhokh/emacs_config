@@ -89,9 +89,9 @@
   (setq doom-themes-enable-bold t
 	doom-themes-enable-italic t)
   ;; Often used themes
-  (load-theme 'doom-henna)
-  ;; (load-theme 'doom-ephemeral)
-  ;; (load-theme 'doom-moonlight)
+  (load-theme 'doom-henna t)
+  ;; (load-theme 'doom-ephemeral t)
+  ;; (load-theme 'doom-moonlight t)
   ;; (load-theme 'doom-nord-light t)
   (doom-themes-visual-bell-config))
 
@@ -126,7 +126,7 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
-(use-package general
+ (use-package general
   :config
   (general-create-definer rune/leader-keys
     :keymaps '(normal insert visual emacs)
@@ -153,15 +153,17 @@
 ;; It was fixed by commented all configuration lines (left only (use-package evil) and (evil-mode 1)
 ;; Don't know why but evil mode doesn'y work with all these config after fresh open
 ;; but works fine with "minimal" config
+
+;; C-w in nornal mode will show evil key bindings
 (use-package evil
-  ;; :init
+  :init
   ;; (setq evil-want-integration t)
-  ;; (setq evil-want-keybinding nil)
+  (setq evil-want-keybinding nil)
   ;; (setq evil-want-C-u-scroll t)
   ;; (setq evil-want-C-i-jump nil)
   ;; :hook (evil-mode . rune/evil-hook))
   :config
-  (evil-mode 1))
+  (evil-mode 1)) 
   ;; (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   ;; (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
@@ -172,6 +174,21 @@
   ;; (evil-set-initial-state 'messages-buffer-mode 'normal)
   ;; (evil-set-initial-state 'dashboard-mode 'normal))
 
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init)) 
+
+(use-package hydra)
+
+(defhydra hydra-text-scale (:timeout 4)
+  "scale text"
+  ("j" text-scale-increase "in")
+  ("k" text-scale-decrease "out"))
+
+
+
+
 ;; Some code that was generated automaticaly
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -181,7 +198,7 @@
  '(custom-safe-themes
    '("6c531d6c3dbc344045af7829a3a20a09929e6c41d7a7278963f7d3215139f6a7" "745d03d647c4b118f671c49214420639cb3af7152e81f132478ed1c649d4597d" default))
  '(package-selected-packages
-   '(evil general helpful doom-themes counsel swiper ivy-rich which-key rainbow-delimiters doom-modeline ivy use-package command-log-mode)))
+   '(hydra evil-collection evil general helpful doom-themes counsel swiper ivy-rich which-key rainbow-delimiters doom-modeline ivy use-package command-log-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
