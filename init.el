@@ -8,7 +8,7 @@
 
 (setq visible-bell t) ; Set up the visible bell
 
-(set-face-attribute 'default nil :font "Consolas" :height 110)
+(set-face-attribute 'default nil :font "Consolas" :height 120)
 
 ;; Load default theme
 ;; (load-theme 'adwaita)
@@ -184,8 +184,21 @@
 (defhydra hydra-text-scale (:timeout 4)
   "scale text"
   ("j" text-scale-increase "in")
-  ("k" text-scale-decrease "out"))
+  ("k" text-scale-decrease "out")
+  ("f" nil "finished" :exit t))
 
+(rune/leader-keys
+  "ts" '(hydra-text-scale/body :which-key "scale-text"))
+
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  (when (file-directory-p "~/Projects/Code")
+    (setq projectile-project-search-path '("~/Projects/Code")))
+  (setq projectile-switch-project-action #'projectile-dired))
 
 
 
@@ -198,7 +211,7 @@
  '(custom-safe-themes
    '("6c531d6c3dbc344045af7829a3a20a09929e6c41d7a7278963f7d3215139f6a7" "745d03d647c4b118f671c49214420639cb3af7152e81f132478ed1c649d4597d" default))
  '(package-selected-packages
-   '(hydra evil-collection evil general helpful doom-themes counsel swiper ivy-rich which-key rainbow-delimiters doom-modeline ivy use-package command-log-mode)))
+   '(projectile hydra evil-collection evil general helpful doom-themes counsel swiper ivy-rich which-key rainbow-delimiters doom-modeline ivy use-package command-log-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
