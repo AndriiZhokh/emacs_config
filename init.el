@@ -206,6 +206,7 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
+;; For some reason can't install evil-magit
 ;; (use-package evil-magit
 ;;   :after magit)
 
