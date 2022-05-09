@@ -89,8 +89,8 @@
   (setq doom-themes-enable-bold t
 	doom-themes-enable-italic t)
   ;; Often used themes
-  (load-theme 'doom-henna t)
-  ;; (load-theme 'doom-nord-light t)
+  ;; (load-theme 'doom-henna t)
+  (load-theme 'doom-nord-light t)
   (doom-themes-visual-bell-config))
 
 
