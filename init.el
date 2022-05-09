@@ -206,7 +206,11 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-;; For some reason can't install evil-magit
+;; For some reason can't install evil-magit (
+;; https://github.com/emacs-evil/evil-magit
+;; This package was removed from MELPA
+;; And repository is no longer maintained
+;; Pacakge is now a part of `evil-collection`
 ;; (use-package evil-magit
 ;;   :after magit)
 
