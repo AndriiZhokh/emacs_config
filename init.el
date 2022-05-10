@@ -214,6 +214,14 @@
 ;; (use-package evil-magit
 ;;   :after magit)
 
+;; Can't install also that package
+;; Need to figure out why
+;; Also need to configure a GitHub token before using this package
+;; - https://magit.vc/manual/forge/Token-Creation.html#Token-Creation
+;; - https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started
+;; (use-package forge)
+
+(use-package org)
 
 ;; Some code that was generated automaticaly
 (custom-set-variables
@@ -224,7 +232,7 @@
  '(custom-safe-themes
    '("6c531d6c3dbc344045af7829a3a20a09929e6c41d7a7278963f7d3215139f6a7" "745d03d647c4b118f671c49214420639cb3af7152e81f132478ed1c649d4597d" default))
  '(package-selected-packages
-   '(evil-magit magit counsel-projectile projectile hydra evil-collection evil general helpful doom-themes counsel swiper ivy-rich which-key rainbow-delimiters doom-modeline ivy use-package command-log-mode)))
+   '(forge evil-magit magit counsel-projectile projectile hydra evil-collection evil general helpful doom-themes counsel swiper ivy-rich which-key rainbow-delimiters doom-modeline ivy use-package command-log-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
