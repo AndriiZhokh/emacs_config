@@ -8,20 +8,30 @@
                        
 
 ;; Basic UI configuration ----------------------------------------------------
+(defvar runemacs/default-font-size 120)
+(defvar runemacs/default-font-family "Consolas")
+
 (setq inhibit-startup-message t)
 
 (scroll-bar-mode -1)  ; Disable visible scrollbar
 (tool-bar-mode -1)    ; Disable toolbar
 (tooltip-mode -1)     ; Disable tooltips
 (set-fringe-mode 10)  ; Give some breathing room???
+
 (menu-bar-mode -1)    ; Disable the menu bar
 
 (setq visible-bell t) ; Set up the visible bell
 
-(set-face-attribute 'default nil :font "Consolas" :height 120)
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+		term-mode-hook
+		shell-mode-hook
+		eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;; Load default theme
-;; (load-theme 'adwaita)
+;; Font configuration -----------------------------------------------------------
+
+(set-face-attribute 'default nil :font runemacs/default-font-family :height runemacs/default-font-size)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -50,11 +60,6 @@
 (column-number-mode)
 (global-display-line-numbers-mode t)
 
-;; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
-		term-mode-hook
-		eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (use-package command-log-mode)
 
