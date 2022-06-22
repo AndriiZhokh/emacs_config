@@ -6,8 +6,6 @@
 ;;    \ \_______\ \__\    \ \__\ \__\ \__\ \_______\____\_\  \ 
 ;;     \|_______|\|__|     \|__|\|__|\|__|\|_______|\_________\
 ;;                                                 \|_________|
-;;                                                             
-;;                                                             
 ;;  ________  ________  ________   ________ ___  ________      
 ;; |\   ____\|\   __  \|\   ___  \|\  _____\\  \|\   ____\     
 ;; \ \  \___|\ \  \|\  \ \  \\ \  \ \  \__/\ \  \ \  \___|     
@@ -15,8 +13,6 @@
 ;;   \ \  \____\ \  \\\  \ \  \\ \  \ \  \_| \ \  \ \  \|\  \  
 ;;    \ \_______\ \_______\ \__\\ \__\ \__\   \ \__\ \_______\ 
 ;;     \|_______|\|_______|\|__| \|__|\|__|    \|__|\|_______| 
-;;                                                             
-;;
 ;;
 ;; Basic UI configuration ----------------------------------------------------
 (defvar runemacs/default-font-size 120)
@@ -118,9 +114,9 @@
   (setq doom-themes-enable-bold t
 	doom-themes-enable-italic t)
   ;; Often used themes
-  ;; (load-theme 'doom-henna t)
+  (load-theme 'doom-henna t)
   ;; (load-theme 'doom-nord-light t)
-  (load-theme 'doom-ayu-light t)
+  ;; (load-theme 'doom-ayu-light t)
   (doom-themes-visual-bell-config))
 
 
@@ -252,10 +248,10 @@
 ;; (use-package forge)
 
 ;; Org Mode Configuration ---------------------------------------------------------------
-
+;; https://zzamboni.org/post/beautifying-org-mode-in-emacs/ -- Need to check this article
 (defun efs/org-mode-setup ()
   (org-indent-mode)
-  (variable-pitch-mode 1)
+  (variable-pitch-mode 0)
   (visual-line-mode 1))
 
 (defun efs/org-font-setup ()
@@ -273,7 +269,7 @@
                   (org-level-6 . 1.1)
                   (org-level-7 . 1.1)
                   (org-level-8 . 1.1)))
-    (set-face-attribute (car face) nil :font "Consolas" :weight 'regular :height (cdr face)))
+    (set-face-attribute (car face) nil :font runemacs/default-font-family :weight 'regular :height (cdr face)))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
