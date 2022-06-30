@@ -293,6 +293,9 @@
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
+;; Open org mode link to other file in the same window
+(setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
+
 (defun efs/org-mode-visual-fill ()
   (setq visual-fill-column-width 100
         visual-fill-column-center-text t)
